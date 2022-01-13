@@ -1,29 +1,110 @@
-.<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="script.js" href="script.js"/>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- link to bootstrap and fontawesome-->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
 
-<header>Receipe</header>
+    <link rel="stylesheet" href="./assets/style.css"/>
+    <title>Food Data Base for New Recipes</title>
+</head>
 
-<Body>
-<h1>Choice of Receipe</h1>
-    <div>Receipe</div>
+<body>
 
-    <div>Search</div>
+    <div class= "bg-primary text-white text-center">
+        <div class="container-fluid">
+          <h1>
+            <i class="fas fa-utensils"></i>
+            Food Data Base for New Recipes
+          </h1>
+        </div>
+    </div>
 
-    <h2>ingredients</h2>
-    <p>Masmman Beef</p>
-    <p>Beef</p>
+    <main class="container row">
+      <div class="align-items-start col-4">
+          <div class="search border-bo border-dark">
+              <div class="row">
+                  <h1>Search for a Recipes:</h1>
+              </div>
+              <div class="row">
+                  <input type="text" class="SearchInput" placeholder="Enter a Recipe">
+                  <button type="submit" class="searchBtn">
+                      <i class="fas fa-search-location"></i>
+                  </button>
+              </div>
 
-    <div>History</div>
+              <div>
+                <select class="form-select" aria-label="Default select example">
+                  <option selected>Open this for Dietary Requirements</option>
+                  <option value="1">One</option>
+                  <option value="2">Two</option>
+                  <option value="3">Three</option>
+                </select>
+              </div>
 
-    <div>Results</div>
+              <div>
+                <select class="form-select" aria-label="Default select example">
+                  <option selected>Open this for additional filters</option>
+                  <option value="1">One</option>
+                  <option value="2">Two</option>
+                  <option value="3">Three</option>
+                </select>
+              </div>
+          </div>
+
+          <div class="Favorites">
+            <h2>Favorite Recipes</h2>
+          </div>
+    </div>
+
+    <div id="SearchResults" class="align-items-end border col-8 hide">
+      <div class="SearchRecipes">
+          <div class="row">
+            <h3>
+              input result results here, maybe in card form, and it clickable so that it 
+              takes us to an external page with additional info.
+              Also maybe have clickable items that saves this recipe into local storage.
+            </h3>
+
+            <div class="card" style="width: 18rem;">
+              <img src="..." class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+
+            </div>
+      </div>
+
+      <div class="additional">
+          <h3>temporary incase we want to add something here:</h3>
+          <div class="card-row"></div>
+      </div>
+  </div>
 
 
 
 
-</Body>
+    </main>
 
-<footer></footer>
+</body>
+
+<footer class="text-center text-lg-start bg-light text-muted">
+  <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+    © 2021 Copyright:
+    <a class="text-reset fw-bold" href="https://mdbootstrap.com/">project1</a>
+  </div>
+</footer>
+

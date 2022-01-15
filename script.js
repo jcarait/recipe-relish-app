@@ -19,24 +19,20 @@ var searchAPi = function (query) {
 
     var apiUrl = "https://api.edamam.com/api/recipes/v2?" + "q=" + query + "&app_key=" + apiKey + "&app_id=" + apiID + "&type=public";
 
-
-
-    console.log(apiUrl);
-    fetch(apiUrl).then(function (response) {
+    fetch(apiUrl, {
+        mode: "cors"
+    }).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
                 console.log(data);
-               var recipeResults = {
-                label: data.hits[0].recipe.label,
-                url: data.hits[0].recipe.url,
-                image: data.hits[0].recipe.images.REGULAR.url
-               }
-
-               console.log(recipeResults.label, recipeResults.url, recipeResults.image)
-
-            displayResults(recipeResults.label, recipeResults.url, recipeResults.image)
-
-
+                for (var i = 0; i < 5; i++) {
+                    var recipeResults = {
+                        label: data.hits[i].recipe.label,
+                        url: data.hits[i].recipe.url,
+                        image: data.hits[i].recipe.image
+                    }
+                    displayResults(recipeResults.label, recipeResults.url, recipeResults.image)
+                }
             });
         }
     });
@@ -53,9 +49,10 @@ var displayResults = function (label, url, image) {
     cardEl.setAttribute("class", "card")
     cardElBody.setAttribute("class", "card-body");
     subtitleEl.textContent = label;
-    cardImageEl.setAttribute("src", url);
+    cardImageEl.src = url;
+    cardImageEl.crossOrigin = "anonymous";
     linkEl.setAttribute("href", url);
-    linkEl.textContent = url;
+    linkEl.textContent = "View Recipe";
 
     searchResults.appendChild(cardEl);
     cardEl.appendChild(cardElBody);
@@ -64,6 +61,10 @@ var displayResults = function (label, url, image) {
     cardElBody.appendChild(linkEl);
 
 };
+
+var getFiveResults = function () {
+
+}
 
 
 formInput.addEventListener("submit", formSubmitHandler);

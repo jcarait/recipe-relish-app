@@ -1,112 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- link to bootstrap and fontawesome-->
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
-      crossorigin="anonymous"
-    />
-
-    <link rel="stylesheet" href="./styles.css"/>
-    <title>Food Data Base for New Recipes</title>
+    <title>Recipe Relish</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css" integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
+    <link rel="stylesheet" href="./style.css" />
 </head>
 
 <body>
+    <!--Page Header-->
+    <header class="subnav-hero-section">
+        <img src="" alt="Website logo" class="logo-left">
+        <h1 class="subnav-hero-headline">Recipe Relish</h1>
+        <ul class="subnav-hero-subnav">
+            <li><a href="#" class="is-active">Find Recipe</a></li>
+            <li><a href="./Pages/saved.html">Saved Searches &#x2661 </a></li>
+        </ul>
+    </header>
 
-    <div class= "bg-primary text-white text-center">
-        <div class="container-fluid">
-          <h1>
-            <i class="fas fa-utensils"></i>
-            Food Data Base for New Recipes
-          </h1>
+    <!--Main search bar with recipe results-->
+    <section>
+        <div>
+            <p class="instructions">Once you're ready to search, click the search button to see your recipe results!</p>
         </div>
-    </div>
-
-    <main class="container row">
-      <div class="align-items-start col-4">
-          <div class="search border-bo border-dark">
-              <div class="row">
-                  <h1>Search for a Recipes:</h1>
-              </div>
-              <div class="row">
-                  <form id="form-input">
-                    <input type="text" id="search-query" placeholder="Enter a Recipe">
-                    <button type="submit" class="searchBtn">
-                      <i class="fas fa-search-location"></i>
-                    </button>
-                  </form>
-              </div>
-
-              <div>
-                <select id="diet" class="form-select" aria-label="Default select example">
-                  <option selected>Open this for Dietary Requirements</option>
-                  <option value="1">Balanced</option>
-                  <option value="2">High-fiber</option>
-                  <option value="3">Three</option>
-                </select>
-              </div>
-
-              <div>
-                <select id="meal-type" class="form-select" aria-label="Default select example">
-                  <option selected>MealType</option>
-                  <option value="1">Breakfast</option>
-                  <option value="2">Lunch</option>
-                  <option value="3">Snack</option>
-                </select>
-              </div>
-          </div>
-
-          <div class="Favorites">
-            <h2>Favorite Recipes</h2>
-          </div>
-    </div>
-
-    <div class="align-items-end border col-8 hide">
-      <div class="wrapper">
-          <div class="row" id="search-results">
-
-            <!-- <div class="card" style="width: 18rem;">
-              <img src="..." class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-              </div> -->
-
+        <div class="search">
+            <div class="input-group input-group-rounded">
+                <input id="form-input" class="input-group-field" type="search" placeholder="Find your recipe">
+                <div class="input-group-button">
+                    <button id="add-button" type="submit" class="button secondary" value="Add">Search</button>
+                </div>
             </div>
-      </div>
-      </div>
+        </div>
+    </section>
 
-      <div class="additional">
-          <h3></h3>
-          <div class="card-row"></div>
-      </div>
-  </div>
+    <!--Toggle switches for user's diet-->
+    <div class="switch-group">
+        <!-- Vegetarian -->
+        <div class="switch-label">Vegetarian?
+            <div class="switch small">
+                <input class="switch-input" id="vegetarian" type="checkbox" name="vegetarian">
+                <label class="switch-paddle" for="vegetarian">
+            <span class="show-for-sr">Vegetarian</span>
+            <span class="switch-active" aria-hidden="true">Yes</span>
+            <span class="switch-inactive" aria-hidden="true">No</span>
+          </label>
+            </div>
+        </div>
+        <!-- Vegan -->
+        <div class="switch-label">Vegan?
+            <div class="switch small">
+                <input class="switch-input" id="vegan" type="checkbox" name="vegan">
+                <label class="switch-paddle" for="vegan">
+            <span class="show-for-sr">Vegan</span>
+            <span class="switch-active" aria-hidden="true">Yes</span>
+            <span class="switch-inactive" aria-hidden="true">No</span>
+          </label>
+            </div>
+        </div>
+        <!-- Dairy free -->
+        <div class="switch-label">Dairy free?
+            <div class="switch small">
+                <input class="switch-input" id="dairy-free" type="checkbox" name="dairy-free">
+                <label class="switch-paddle" for="dairy-free">
+            <span class="show-for-sr">Dairy free</span>
+            <span class="switch-active" aria-hidden="true">Yes</span>
+            <span class="switch-inactive" aria-hidden="true">No</span>
+          </label>
+            </div>
+        </div>
+        <!-- Gluten free -->
+        <div class="switch-label">Gluten free?
+            <div class="switch small">
+                <input class="switch-input" id="gluten-free" type="checkbox" name="gluten-free">
+                <label class="switch-paddle" for="gluten-free">
+            <span class="show-for-sr">Gluten free</span>
+            <span class="switch-active" aria-hidden="true">Yes</span>
+            <span class="switch-inactive" aria-hidden="true">No</span>
+          </label>
+            </div>
+        </div>
+
+    </div>
+
+    <!--Dynamically created recipe results-->
+    <section class="recipe-results">
+        <div class="results-section">
+            <h6 class="class-head">Your Recipes:</h6>
+        </div>
+        </div>
+
+        <!-- Table to display the results -->
+        <table class="results">
+            <thead>
+                <tr>
+                    <th class="myfixed" width="150"></th>
+                    <th class="myfixed" width="150">Recipe</th>
+                    <th class="myfixed" width="100">Total Time</th>
+                    <th class="myfixed" width="100">Serves</th>
+                    <th class="myfixed" width="150">Link</th>
+                    <th class="myfixed" width="125">Save Recipe</th>
+                </tr>
+            </thead>
+            <tbody class="stack hover" id="table-body">
+                <!-- Recipe results will populate here -->
+            </tbody>
+        </table>
+        <hr>
+        <div class="backtosearch">
+            <button class="button expanded clear-button" type="button">Search Again</button>
+        </div>
+    </section>
 
 
-
-
-
-    </main>
-
-    <footer class="text-center text-lg-start bg-light text-muted mt-auto">
-      <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-        © 2021 Copyright:
-        <a class="text-reset fw-bold" href="https://mdbootstrap.com/">project1</a>
-      </div>
-    </footer>
-    
-  <script src="./script.js"></script>
+    <script src="./script.js"></script>
 </body>
-
-
-
+<footer>
+    <p class="copy">&copy; Copyright 2021</p>
+    <p class="copy">
+        Built with &#x2661; by
+        <a href="https://github.com/carolinatnp/recipe-app" target="_blank">Carolina, Jonathan, Kevin and Mohamed</a
+      >
+    </p>
+</html>

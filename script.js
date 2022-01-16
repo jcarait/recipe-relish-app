@@ -16,22 +16,19 @@ var formSubmitHandler = function (event) {
     
     var query = searchQuery.value;
 
-    if (!searchQuery) {
-        console.log("Enter a recipe name or ingredient to find your recipe!")
-    }
-    else if (!veganOption) {
-        searchAPi(query, vegan);
-        
-    } else {
-        searchAPi(query);
-    }
-        
-    
+    if (query) {
+        searchAPi(query, veganOption);
+    } 
 };
 
 var searchAPi = function (query, vegan) {
-    console.log(vegan)
-    var apiUrl = "https://api.edamam.com/api/recipes/v2?" + "q=" + query + "&health=" + vegan + "&app_key=" + apiKey + "&app_id=" + apiID + "&type=public";
+
+    if (!vegan) {
+        var apiUrl = "https://api.edamam.com/api/recipes/v2?" + "q=" + query + "&app_key=" + apiKey + "&app_id=" + apiID + "&type=public";
+    } else {
+        var apiUrl = "https://api.edamam.com/api/recipes/v2?" + "q=" + query + "&health=" + vegan + "&app_key=" + apiKey + "&app_id=" + apiID + "&type=public";
+    }
+   
     console.log(apiUrl)
 
     fetch(apiUrl, {

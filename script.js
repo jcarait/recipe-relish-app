@@ -1,8 +1,8 @@
-var formInput = document.querySelector("#form-input");
+var formInput = document.querySelector("#add-button");
 var searchQuery = document.querySelector("#search-query");
 var dietRequirement = document.querySelector("#diet");
 var mealType = document.querySelector("#meal-type");
-var searchResults = document.querySelector("#search-results");
+var searchResults = document.querySelector("#recipe-results");
 
 var apiID = "bf7ef27c";
 var apiKey = "f26b311cc0cf67ce4f322e55dca05398";
@@ -65,5 +65,5 @@ var displayResults = function (label, url, image) {
 };
 
 
-formInput.addEventListener("submit", formSubmitHandler);
+formInput.addEventListener("click", formSubmitHandler);
 // getApiData();

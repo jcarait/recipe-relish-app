@@ -7,6 +7,8 @@ var searchResults = document.querySelector("#search-results");
 var apiID = "bf7ef27c";
 var apiKey = "f26b311cc0cf67ce4f322e55dca05398";
 
+//more vars here
+
 var formSubmitHandler = function (event) {
     event.preventDefault();
     var query = searchQuery.value;
@@ -18,6 +20,7 @@ var formSubmitHandler = function (event) {
 var searchAPi = function (query) {
 
     var apiUrl = "https://api.edamam.com/api/recipes/v2?" + "q=" + query + "&app_key=" + apiKey + "&app_id=" + apiID + "&type=public";
+    console.log(apiUrl)
 
     fetch(apiUrl, {
         mode: "cors"
@@ -29,7 +32,7 @@ var searchAPi = function (query) {
                     var recipeResults = {
                         label: data.hits[i].recipe.label,
                         url: data.hits[i].recipe.url,
-                        image: data.hits[i].recipe.image
+                        image: data.hits[i].recipe.images.THUMBNAIL.url
                     }
                     displayResults(recipeResults.label, recipeResults.url, recipeResults.image)
                 }
@@ -49,8 +52,7 @@ var displayResults = function (label, url, image) {
     cardEl.setAttribute("class", "card")
     cardElBody.setAttribute("class", "card-body");
     subtitleEl.textContent = label;
-    cardImageEl.src = url;
-    cardImageEl.crossOrigin = "anonymous";
+    cardImageEl.src = image;
     linkEl.setAttribute("href", url);
     linkEl.textContent = "View Recipe";
 
@@ -61,10 +63,6 @@ var displayResults = function (label, url, image) {
     cardElBody.appendChild(linkEl);
 
 };
-
-var getFiveResults = function () {
-
-}
 
 
 formInput.addEventListener("submit", formSubmitHandler);

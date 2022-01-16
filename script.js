@@ -9,30 +9,28 @@ var apiID = "bf7ef27c";
 var apiKey = "f26b311cc0cf67ce4f322e55dca05398";
 
 //more vars here
-var veganOption = false
+var veganOption
 
 var formSubmitHandler = function (event) {
     event.preventDefault();
     
     var query = searchQuery.value;
-    var vegan 
-    
-    if (veganOption) {
-        vegan = "vegan";       
-}
-console.log(vegan)
 
-    if (query) {
+    if (!searchQuery) {
+        console.log("Enter a recipe name or ingredient to find your recipe!")
+    }
+    else if (!veganOption) {
+        searchAPi(query, vegan);
+        
+    } else {
         searchAPi(query);
-        console.log("queryOnly")
     }
-    else if (query && vegan){
-        searchAPi(query, vegan)
-    }
+        
+    
 };
 
 var searchAPi = function (query, vegan) {
-
+    console.log(vegan)
     var apiUrl = "https://api.edamam.com/api/recipes/v2?" + "q=" + query + "&health=" + vegan + "&app_key=" + apiKey + "&app_id=" + apiID + "&type=public";
     console.log(apiUrl)
 
@@ -78,14 +76,13 @@ var displayResults = function (label, url, image) {
 
 };
 
-
 formInput.addEventListener("click", formSubmitHandler);
 veganCheckEl.addEventListener("change", function(){
 
     if (this.checked) {
-        veganOption = true
-        console.log(veganOption)
-
+        veganOption = "vegan"
+    } else {
+         veganOption
     }
 })
 // getApiData();

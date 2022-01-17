@@ -1,4 +1,4 @@
-var formInput = document.querySelector("#add-button");
+var formEl = document.querySelector("#form-input");
 var searchQuery = document.querySelector("#search-query");
 var dietRequirement = document.querySelector("#diet");
 var mealType = document.querySelector("#meal-type");
@@ -28,41 +28,24 @@ var formSubmitHandler = function (event) {
 };
 
 var searchAPi = function (query, vegan, glutenFree, vegetarian, dairy) {
-
+    
+    var apiUrl = "https://api.edamam.com/api/recipes/v2?" + "q=" + query + "&app_key=" + apiKey + "&app_id=" + apiID + "&type=public";
 
     //logical function to determine which API paramters to query based on user selection
-    if (!vegan && !glutenFree && !vegetarian && !dairy) {
-        var apiUrl = "https://api.edamam.com/api/recipes/v2?" + "q=" + query + "&app_key=" + apiKey + "&app_id=" + apiID + "&type=public";
-    } else if (!vegan && !vegetarian && !dairy) {
-        var apiUrl = "https://api.edamam.com/api/recipes/v2?" + "q=" + query + "&health=" + glutenFree + "&app_key=" + apiKey + "&app_id=" + apiID + "&type=public";
-    } else if (!vegan && !glutenFree && !dairy) {
-        var apiUrl = "https://api.edamam.com/api/recipes/v2?" + "q=" + query + "&health=" + vegetarian + "&app_key=" + apiKey + "&app_id=" + apiID + "&type=public";
-    } else if (!glutenFree && !vegetarian && !vegan) {
-        var apiUrl = "https://api.edamam.com/api/recipes/v2?" + "q=" + query + "&health=" + dairy + "&app_key=" + apiKey + "&app_id=" + apiID + "&type=public";
-    } else if (!glutenFree && !vegetarian && !dairy) {
-        var apiUrl = "https://api.edamam.com/api/recipes/v2?" + "q=" + query + "&health=" + vegan + "&app_key=" + apiKey + "&app_id=" + apiID + "&type=public";
-    } else if (!glutenFree && !dairy) {
-        var apiUrl = "https://api.edamam.com/api/recipes/v2?" + "q=" + query + "&health=" + vegan + "&health=" + vegetarian + "&app_key=" + apiKey + "&app_id=" + apiID + "&type=public";
-    } else if (!vegan && !dairy) {
-        var apiUrl = "https://api.edamam.com/api/recipes/v2?" + "q=" + query + "&health=" + glutenFree + "&health=" + vegetarian + "&app_key=" + apiKey + "&app_id=" + apiID + "&type=public";
-    } else if (!vegetarian && !dairy) {
-        var apiUrl = "https://api.edamam.com/api/recipes/v2?" + "q=" + query + "&health=" + glutenFree + "&health=" + vegan + "&app_key=" + apiKey + "&app_id=" + apiID + "&type=public";
-    } else if (!glutenFree && !vegan) {
-        var apiUrl = "https://api.edamam.com/api/recipes/v2?" + "q=" + query + "&health=" + dairy + "&health=" + vegetarian + "&app_key=" + apiKey + "&app_id=" + apiID + "&type=public";
-    } else if (!vegetarian && !vegan) {
-        var apiUrl = "https://api.edamam.com/api/recipes/v2?" + "q=" + query + "&health=" + glutenFree + "&health=" + dairy + "&app_key=" + apiKey + "&app_id=" + apiID + "&type=public";
-    } else if (!glutenFree && !vegetarian) {
-        var apiUrl = "https://api.edamam.com/api/recipes/v2?" + "q=" + query + "&health=" + vegan + "&health=" + dairy + "&app_key=" + apiKey + "&app_id=" + apiID + "&type=public";
-    } else if (!vegetarian) {
-        var apiUrl = "https://api.edamam.com/api/recipes/v2?" + "q=" + query + "&health=" + glutenFree + "&health=" + vegan + "&health=" + dairy + "&app_key=" + apiKey + "&app_id=" + apiID + "&type=public";
-    } else if (!vegan) {
-        var apiUrl = "https://api.edamam.com/api/recipes/v2?" + "q=" + query + "&health=" + glutenFree + "&health=" + vegetarian + "&health=" + dairy + "&app_key=" + apiKey + "&app_id=" + apiID + "&type=public";
-    } else if (!glutenFree) {
-        var apiUrl = "https://api.edamam.com/api/recipes/v2?" + "q=" + query + "&health=" + vegetarian + "&health=" + vegan + "&health=" + dairy + "&app_key=" + apiKey + "&app_id=" + apiID + "&type=public";
-    } else if (!dairy) {
-        var apiUrl = "https://api.edamam.com/api/recipes/v2?" + "q=" + query + "&health=" + vegetarian + "&health=" + vegan + "&health=" + glutenFree + "&app_key=" + apiKey + "&app_id=" + apiID + "&type=public";
-    } else {
-        var apiUrl = "https://api.edamam.com/api/recipes/v2?" + "q=" + query + "&health=" + vegan + "&health=" + glutenFree + "&health=" + vegetarian + "&health=" + dairy + "&app_key=" + apiKey + "&app_id=" + apiID + "&type=public";
+    if (vegan) {
+        apiUrl += "&health=" + vegan
+    }
+
+    if (vegetarian) {
+        apiUrl += "&health=" + vegetarian
+    }
+
+    if (dairy) {
+        apiUrl += "&health=" + dairy
+    }
+
+    if (glutenFree) {
+        apiUrl += "&health=" + glutenFree
     }
    
     console.log(apiUrl)
@@ -109,7 +92,7 @@ var displayResults = function (label, url, image) {
 
 };
 
-formInput.addEventListener("click", formSubmitHandler);
+formEl.addEventListener("submit", formSubmitHandler);
 
 veganCheckboxEl.addEventListener("change", function(){
 

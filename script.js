@@ -4,12 +4,13 @@ var dietRequirement = document.querySelector("#diet");
 var mealType = document.querySelector("#meal-type");
 var searchResults = document.querySelector("#recipe-results");
 var veganCheckEl = document.querySelector("#vegan");
+var glutenFreeEl = document.querySelector("#gluten-free");
 
 var apiID = "bf7ef27c";
 var apiKey = "f26b311cc0cf67ce4f322e55dca05398";
 
-//more vars here
 var veganOption
+var glutenOption
 
 var formSubmitHandler = function (event) {
     event.preventDefault();
@@ -17,16 +18,20 @@ var formSubmitHandler = function (event) {
     var query = searchQuery.value;
 
     if (query) {
-        searchAPi(query, veganOption);
+        searchAPi(query, veganOption, glutenOption);
     } 
 };
 
-var searchAPi = function (query, vegan) {
+var searchAPi = function (query, vegan, glutenFree) {
 
-    if (!vegan) {
+    if (!vegan && !glutenFree) {
         var apiUrl = "https://api.edamam.com/api/recipes/v2?" + "q=" + query + "&app_key=" + apiKey + "&app_id=" + apiID + "&type=public";
-    } else {
+    } else if (!vegan) {
+        var apiUrl = "https://api.edamam.com/api/recipes/v2?" + "q=" + query + "&health=" + glutenFree + "&app_key=" + apiKey + "&app_id=" + apiID + "&type=public";
+    } else if (!glutenFree) {
         var apiUrl = "https://api.edamam.com/api/recipes/v2?" + "q=" + query + "&health=" + vegan + "&app_key=" + apiKey + "&app_id=" + apiID + "&type=public";
+    } else {
+        var apiUrl = "https://api.edamam.com/api/recipes/v2?" + "q=" + query + "&health=" + vegan + "&health=" + glutenFree + "&app_key=" + apiKey + "&app_id=" + apiID + "&type=public";
     }
    
     console.log(apiUrl)
@@ -80,6 +85,15 @@ veganCheckEl.addEventListener("change", function(){
         veganOption = "vegan"
     } else {
          veganOption
+    }
+})
+
+glutenFreeEl.addEventListener("change", function(){
+
+    if (this.checked) {
+        glutenOption = "gluten-free"
+    } else {
+         glutenOption
     }
 })
 // getApiData();

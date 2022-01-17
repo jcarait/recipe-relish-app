@@ -149,6 +149,37 @@
   border-radius: 5000px;
 }
 
+/* Cards Section */
+
+h4 {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.card {
+  margin: 0 20px;
+  width: 200px;
+}
+
+.card-section {
+  height: 200px;
+  padding: 1em;
+}
+
+.card-divider {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.card > img {
+  width: auto;
+}
+
+.description {
+  display: flex;
+  margin-top: 1em;
+}
+
 /* Ingredients Card */ 
 
 .ingredient-card {
@@ -221,6 +252,13 @@
   padding-top:0;
   border-radius:0px;
   text-align:center;
+}
+
+#recipe-results {
+  display: flex;
+  max-width: 1000px;
+  width: auto;
+  justify-content: space-between;
 }
 
 /* Styling if search results is null*/

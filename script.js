@@ -60,7 +60,7 @@ var searchAPi = function (query, vegan, glutenFree, vegetarian, dairy) {
                     var recipeResults = {
                         label: data.hits[i].recipe.label,
                         url: data.hits[i].recipe.url,
-                        image: data.hits[i].recipe.images.THUMBNAIL.url
+                        image: data.hits[i].recipe.images.SMALL.url
                     }
                     displayResults(recipeResults.label, recipeResults.url, recipeResults.image)
                 }
@@ -72,23 +72,29 @@ var searchAPi = function (query, vegan, glutenFree, vegetarian, dairy) {
 var displayResults = function (label, url, image) {
 
     var cardEl = document.createElement("div");
-    var cardElBody = document.createElement("div");
+    var cardDividerEl = document.createElement("div");
+    var cardSectionEl = document.createElement("div");
     var subtitleEl = document.createElement("h4");
+    var descriptionEl = document.createElement("p");
     var linkEl = document.createElement("a");
     var cardImageEl = document.createElement("img")
 
     cardEl.setAttribute("class", "card")
-    cardElBody.setAttribute("class", "card-body");
+    cardDividerEl.setAttribute("class", "card-divider");
+    cardSectionEl.setAttribute("class", "card-section");
     subtitleEl.textContent = label;
     cardImageEl.src = image;
     linkEl.setAttribute("href", url);
+    descriptionEl.className = "description";
     linkEl.textContent = "View Recipe";
 
     searchResults.appendChild(cardEl);
-    cardEl.appendChild(cardElBody);
-    cardElBody.appendChild(subtitleEl);
-    cardElBody.appendChild(cardImageEl);
-    cardElBody.appendChild(linkEl);
+    cardEl.appendChild(cardDividerEl);
+    cardDividerEl.appendChild(subtitleEl);
+    cardEl.appendChild(cardSectionEl);
+    cardSectionEl.appendChild(cardImageEl);
+    cardSectionEl.appendChild(descriptionEl);
+    descriptionEl.appendChild(linkEl);
 
 };
 

@@ -205,8 +205,10 @@
 .myfixed {
   position: sticky;
   top: 0;
-  background-color:gray;
+  background-color:white;
   color: #fefefe;
+  display: inline-block;
+  text-align: center;
 }
 
 .results {
@@ -251,6 +253,10 @@
 .clear-button:hover {
   background-color:black;
   
+}
+
+thead {
+  background-color: white;
 }
 
   /* recipe results section ends */

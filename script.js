@@ -76,6 +76,7 @@ var displayResults = function (label, url, image) {
     var subtitleEl = document.createElement("h4");
     var descriptionEl = document.createElement("p");
     var linkEl = document.createElement("a");
+    var linkImageEl = document.createElement("a");
     var cardImageEl = document.createElement("img")
 
     cardEl.setAttribute("class", "card")
@@ -85,12 +86,14 @@ var displayResults = function (label, url, image) {
     linkEl.setAttribute("href", url);
     linkEl.setAttribute("target", "_blank");
     linkEl.setAttribute("class", "card-link")
+    linkImageEl.setAttribute("href", url);
     descriptionEl.className = "description";
 
     searchResults.appendChild(cardEl);
     linkEl.appendChild(subtitleEl);
     cardEl.appendChild(cardSectionEl);
-    cardSectionEl.appendChild(cardImageEl);
+    cardSectionEl.appendChild(linkImageEl)
+    linkImageEl.appendChild(cardImageEl);
     cardSectionEl.appendChild(descriptionEl);
     cardSectionEl.appendChild(linkEl);
 

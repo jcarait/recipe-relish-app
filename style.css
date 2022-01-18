@@ -158,8 +158,12 @@ h4 {
 }
 
 .card {
-  margin: 0 20px;
+  margin: 0 20px 20px;
   max-width: 300px;
+}
+
+.card-section:hover a h4 {
+  color: olive;
 }
 
 .card-section a {
@@ -170,7 +174,7 @@ h4 {
   padding: 1em;
 }
 
-a > img {
+.card-section > img {
   max-width: none;
 }
 
@@ -243,8 +247,6 @@ a > img {
 
 .results {
   align-content: center;
-  max-width: 900px;
-  max-height: 400px;
   margin-left:auto;
   margin-right: auto;
   margin-top: 0px;
@@ -255,9 +257,9 @@ a > img {
 
 #recipe-results {
   display: flex;
-  flex: wrap;
-  width: auto;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
 }
 
 /* Styling if search results is null*/

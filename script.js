@@ -5,136 +5,156 @@ var mealType = document.querySelector("#meal-type");
 var searchResults = document.querySelector("#recipe-results");
 var veganCheckboxEl = document.querySelector("#vegan");
 var glutenFreeCheckboxEl = document.querySelector("#gluten-free");
-var vegeterianCheckboxEl = document.querySelector("#vegetarian")
-var dairyFreeCheckboxEl = document.querySelector("#dairy-free")
-
+var vegeterianCheckboxEl = document.querySelector("#vegetarian");
+var dairyFreeCheckboxEl = document.querySelector("#dairy-free");
 
 var apiID = "bf7ef27c";
 var apiKey = "f26b311cc0cf67ce4f322e55dca05398";
 
-var veganOption
-var glutenOption
-var vegetarianOption
-var dairyOption
+var veganOption;
+var glutenOption;
+var vegetarianOption;
+var dairyOption;
+
+var favRecipesList = [];
+var favRecipes = {
+  name: "",
+  url: "",
+  imageUrl: "",
+};
 
 var formSubmitHandler = function (event) {
-    event.preventDefault();
-    
-    var query = searchQuery.value;
+  event.preventDefault();
 
-    if (query) {
-        searchAPi(query, veganOption, glutenOption, vegetarianOption, dairyOption);
-    } 
+  searchResults.innerHTML = "";
+
+  if (veganCheckboxEl.checked) {
+    veganOption = "vegan";
+  } else {
+    veganOption;
+  }
+
+  if (glutenFreeCheckboxEl.checked) {
+    glutenOption = "gluten-free";
+  } else {
+    glutenOption;
+  }
+
+  if (vegeterianCheckboxEl.checked) {
+    vegetarianOption = "vegetarian";
+  } else {
+    vegetarianOption;
+  }
+
+  if (dairyFreeCheckboxEl.checked) {
+    dairyOption = "dairy-free";
+  } else {
+    dairyOption;
+  }
+
+  var query = searchQuery.value;
+
+  if (query) {
+    searchAPi(query, veganOption, glutenOption, vegetarianOption, dairyOption);
+  }
 };
 
 var searchAPi = function (query, vegan, glutenFree, vegetarian, dairy) {
-    
-    var apiUrl = "https://api.edamam.com/api/recipes/v2?" + "q=" + query + "&app_key=" + apiKey + "&app_id=" + apiID + "&type=public";
+  var apiUrl =
+    "https://api.edamam.com/api/recipes/v2?" +
+    "q=" +
+    query +
+    "&app_key=" +
+    apiKey +
+    "&app_id=" +
+    apiID +
+    "&type=public";
 
-    //logical function to determine which API paramters to query based on user selection
-    if (vegan) {
-        apiUrl += "&health=" + vegan
-    }
+  //logical function to determine which API paramters to query based on user selection
+  if (vegan) {
+    apiUrl += "&health=" + vegan;
+  }
 
-    if (vegetarian) {
-        apiUrl += "&health=" + vegetarian
-    }
+  if (vegetarian) {
+    apiUrl += "&health=" + vegetarian;
+  }
 
-    if (dairy) {
-        apiUrl += "&health=" + dairy
-    }
+  if (dairy) {
+    apiUrl += "&health=" + dairy;
+  }
 
-    if (glutenFree) {
-        apiUrl += "&health=" + glutenFree
-    }
-   
-    console.log(apiUrl)
+  if (glutenFree) {
+    apiUrl += "&health=" + glutenFree;
+  }
 
-    fetch(apiUrl, {
-        mode: "cors"
-    }).then(function (response) {
-        if (response.ok) {
-            response.json().then(function (data) {
-                console.log(data);
-                for (var i = 0; i < 5; i++) {
-                    var recipeResults = {
-                        label: data.hits[i].recipe.label,
-                        url: data.hits[i].recipe.url,
-                        image: data.hits[i].recipe.images.REGULAR.url
-                    }
-                    displayResults(recipeResults.label, recipeResults.url, recipeResults.image)
-                }
-            });
+  console.log(apiUrl);
+
+  fetch(apiUrl, {
+    mode: "cors",
+  }).then(function (response) {
+    if (response.ok) {
+      response.json().then(function (data) {
+        console.log(data);
+        for (var i = 0; i < 10; i++) {
+          var recipeResults = {
+            label: data.hits[i].recipe.label,
+            url: data.hits[i].recipe.url,
+            image: data.hits[i].recipe.images.REGULAR.url,
+          };
+          displayResults(
+            recipeResults.label,
+            recipeResults.url,
+            recipeResults.image
+          );
         }
-    });
+      });
+    }
+  });
 };
 
 var displayResults = function (label, url, image) {
 
-    var cardEl = document.createElement("div");
-    var cardSectionEl = document.createElement("div");
-    var subtitleEl = document.createElement("h4");
-    var descriptionEl = document.createElement("p");
-    var linkEl = document.createElement("a");
-    var linkImageEl = document.createElement("a");
-    var cardImageEl = document.createElement("img")
+  var cardEl = document.createElement("div");
+  var cardSectionEl = document.createElement("div");
+  var subtitleEl = document.createElement("h4");
+  var descriptionEl = document.createElement("p");
+  var linkEl = document.createElement("a");
+  var linkImageEl = document.createElement("a");
+  var cardImageEl = document.createElement("img");
+  var favButton = document.createElement("i");
 
-    cardEl.setAttribute("class", "card")
-    cardSectionEl.setAttribute("class", "card-section");
-    subtitleEl.textContent = label;
-    cardImageEl.src = image;
-    linkEl.setAttribute("href", url);
-    // linkEl.setAttribute("target", "_blank");
-    linkEl.setAttribute("class", "card-link")
-    linkImageEl.setAttribute("href", url);
-    // linkImageEl.setAttribute("target", "_blank")
-    descriptionEl.className = "description";
+  cardEl.setAttribute("class", "card");
+  cardSectionEl.setAttribute("class", "card-section");
+  subtitleEl.textContent = label;
+  cardImageEl.src = image;
+  linkEl.setAttribute("href", url);
+  linkEl.setAttribute("target", "_blank");
+  linkEl.setAttribute("class", "card-link");
+  linkImageEl.setAttribute("href", url);
+  linkImageEl.setAttribute("target", "_blank");
+  descriptionEl.className = "description";
+  favButton.setAttribute("class", "far fa-heart");
 
-    searchResults.appendChild(cardEl);
-    linkEl.appendChild(subtitleEl);
-    cardEl.appendChild(cardSectionEl);
-    cardSectionEl.appendChild(linkImageEl)
-    linkImageEl.appendChild(cardImageEl);
-    cardSectionEl.appendChild(descriptionEl);
-    cardSectionEl.appendChild(linkEl);
+  searchResults.appendChild(cardEl);
+  linkEl.appendChild(subtitleEl);
+  cardEl.appendChild(cardSectionEl);
+  cardSectionEl.appendChild(linkImageEl);
+  linkImageEl.appendChild(cardImageEl);
+  cardSectionEl.appendChild(descriptionEl);
+  cardSectionEl.appendChild(linkEl);
+  cardSectionEl.appendChild(favButton);
 
+  favButton.addEventListener("click", function () {
+    favRecipes.name = favButton.previousSibling.firstChild.textContent;
+    favRecipes.url = favButton.previousSibling.href;
+    favRecipes.imageUrl =
+      favButton.previousSibling.previousSibling.previousSibling.src;
+    favRecipesList.push(favRecipes);
+    console.log(favRecipesList);
+    localStorage.setItem("favourites", JSON.stringify(favRecipesList));
+    JSON.parse(localStorage.getItem("favourites"));
+    console.log(JSON.parse(localStorage.getItem("favourites")));
+  });
 };
 
 formEl.addEventListener("submit", formSubmitHandler);
-
-veganCheckboxEl.addEventListener("change", function(){
-
-    if (this.checked) {
-        veganOption = "vegan"
-    } else {
-         veganOption
-    }
-})
-
-glutenFreeCheckboxEl.addEventListener("change", function(){
-
-    if (this.checked) {
-        glutenOption = "gluten-free"
-    } else {
-         glutenOption
-    }
-})
-
-vegeterianCheckboxEl.addEventListener("change", function(){
-
-    if (this.checked) {
-        vegetarianOption = "vegetarian"
-    } else {
-         vegetarianOption
-    }
-})
-
-dairyFreeCheckboxEl.addEventListener("change", function(){
-
-    if (this.checked) {
-        dairyOption = "dairy-free"
-    } else {
-         dairyOption
-    }
-})
-// getApiData();

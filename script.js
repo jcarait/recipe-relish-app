@@ -5,68 +5,102 @@ var mealType = document.querySelector("#meal-type");
 var searchResults = document.querySelector("#recipe-results");
 var veganCheckboxEl = document.querySelector("#vegan");
 var glutenFreeCheckboxEl = document.querySelector("#gluten-free");
-var vegeterianCheckboxEl = document.querySelector("#vegetarian")
-var dairyFreeCheckboxEl = document.querySelector("#dairy-free")
-
+var vegeterianCheckboxEl = document.querySelector("#vegetarian");
+var dairyFreeCheckboxEl = document.querySelector("#dairy-free");
 
 var apiID = "bf7ef27c";
 var apiKey = "f26b311cc0cf67ce4f322e55dca05398";
 
-var veganOption
-var glutenOption
-var vegetarianOption
-var dairyOption
+var veganOption;
+var glutenOption;
+var vegetarianOption;
+var dairyOption;
 
 var formSubmitHandler = function (event) {
-    event.preventDefault();
-    
-    var query = searchQuery.value;
+  event.preventDefault();
 
-    if (query) {
-        searchAPi(query, veganOption, glutenOption, vegetarianOption, dairyOption);
-    } 
+  if (veganCheckboxEl.checked) {
+    veganOption = "vegan";
+  } else {
+    veganOption;
+  }
+
+  if (glutenFreeCheckboxEl.checked) {
+    glutenOption = "gluten-free";
+  } else {
+    glutenOption;
+  }
+
+  if (vegeterianCheckboxEl.checked) {
+    vegetarianOption = "vegetarian";
+  } else {
+    vegetarianOption;
+  }
+
+  if (dairyFreeCheckboxEl.checked) {
+    dairyOption = "dairy-free";
+  } else {
+    dairyOption;
+  }
+
+  var query = searchQuery.value;
+
+  if (query) {
+    searchAPi(query, veganOption, glutenOption, vegetarianOption, dairyOption);
+  }
 };
 
 var searchAPi = function (query, vegan, glutenFree, vegetarian, dairy) {
-    
-    var apiUrl = "https://api.edamam.com/api/recipes/v2?" + "q=" + query + "&app_key=" + apiKey + "&app_id=" + apiID + "&type=public";
+  var apiUrl =
+    "https://api.edamam.com/api/recipes/v2?" +
+    "q=" +
+    query +
+    "&app_key=" +
+    apiKey +
+    "&app_id=" +
+    apiID +
+    "&type=public";
 
-    //logical function to determine which API paramters to query based on user selection
-    if (vegan) {
-        apiUrl += "&health=" + vegan
-    }
+  //logical function to determine which API paramters to query based on user selection
+  if (vegan) {
+    apiUrl += "&health=" + vegan;
+  }
 
-    if (vegetarian) {
-        apiUrl += "&health=" + vegetarian
-    }
+  if (vegetarian) {
+    apiUrl += "&health=" + vegetarian;
+  }
 
-    if (dairy) {
-        apiUrl += "&health=" + dairy
-    }
+  if (dairy) {
+    apiUrl += "&health=" + dairy;
+  }
 
-    if (glutenFree) {
-        apiUrl += "&health=" + glutenFree
-    }
-   
-    console.log(apiUrl)
+  if (glutenFree) {
+    apiUrl += "&health=" + glutenFree;
+  }
 
-    fetch(apiUrl, {
-        mode: "cors"
-    }).then(function (response) {
-        if (response.ok) {
-            response.json().then(function (data) {
-                console.log(data);
-                for (var i = 0; i < 5; i++) {
-                    var recipeResults = {
-                        label: data.hits[i].recipe.label,
-                        url: data.hits[i].recipe.url,
-                        image: data.hits[i].recipe.images.REGULAR.url
-                    }
-                    displayResults(recipeResults.label, recipeResults.url, recipeResults.image)
-                }
-            });
+  console.log(apiUrl);
+
+  fetch(apiUrl, {
+    mode: "cors",
+  }).then(function (response) {
+    if (response.ok) {
+      response.json().then(function (data) {
+        console.log(data);
+        for (var i = 0; i < 10; i++) {
+          var recipeResults = {
+            label: data.hits[i].recipe.label,
+            url: data.hits[i].recipe.url,
+            image: data.hits[i].recipe.images.REGULAR.url,
+          };
+          displayResults(
+            recipeResults.label,
+            recipeResults.url,
+            recipeResults.image
+          );
         }
-    });
+      });
+    }
+  });
 };
 
 var displayResults = function (label, url, image) {
@@ -98,43 +132,6 @@ var displayResults = function (label, url, image) {
     cardSectionEl.appendChild(descriptionEl);
     cardSectionEl.appendChild(linkEl);
 
-};
+}
 
 formEl.addEventListener("submit", formSubmitHandler);
-
-veganCheckboxEl.addEventListener("change", function(){
-
-    if (this.checked) {
-        veganOption = "vegan"
-    } else {
-         veganOption
-    }
-})
-
-glutenFreeCheckboxEl.addEventListener("change", function(){
-
-    if (this.checked) {
-        glutenOption = "gluten-free"
-    } else {
-         glutenOption
-    }
-})
-
-vegeterianCheckboxEl.addEventListener("change", function(){
-
-    if (this.checked) {
-        vegetarianOption = "vegetarian"
-    } else {
-         vegetarianOption
-    }
-})
-
-dairyFreeCheckboxEl.addEventListener("change", function(){
-
-    if (this.checked) {
-        dairyOption = "dairy-free"
-    } else {
-         dairyOption
-    }
-})
-// getApiData();

@@ -84,10 +84,10 @@ var displayResults = function (label, url, image) {
     subtitleEl.textContent = label;
     cardImageEl.src = image;
     linkEl.setAttribute("href", url);
-    linkEl.setAttribute("target", "_blank");
+    // linkEl.setAttribute("target", "_blank");
     linkEl.setAttribute("class", "card-link")
     linkImageEl.setAttribute("href", url);
-    linkImageEl.setAttribute("target", "_blank")
+    // linkImageEl.setAttribute("target", "_blank")
     descriptionEl.className = "description";
 
     searchResults.appendChild(cardEl);

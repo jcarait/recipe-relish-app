@@ -113,6 +113,7 @@ var searchAPi = function (query, vegan, glutenFree, vegetarian, dairy) {
 };
 
 var displayResults = function (label, url, image) {
+
   var cardEl = document.createElement("div");
   var cardSectionEl = document.createElement("div");
   var subtitleEl = document.createElement("h4");

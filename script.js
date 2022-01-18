@@ -17,11 +17,6 @@ var vegetarianOption;
 var dairyOption;
 
 var favRecipesList = [];
-var favRecipes = {
-  name: "",
-  url: "",
-  imageUrl: "",
-};
 
 var formSubmitHandler = function (event) {
   event.preventDefault();
@@ -144,17 +139,23 @@ var displayResults = function (label, url, image) {
   cardSectionEl.appendChild(linkEl);
   cardSectionEl.appendChild(favButton);
 
-  favButton.addEventListener("click", function () {
-    favRecipes.name = favButton.previousSibling.firstChild.textContent;
-    favRecipes.url = favButton.previousSibling.href;
-    favRecipes.imageUrl =
-      favButton.previousSibling.previousSibling.previousSibling.src;
-    favRecipesList.push(favRecipes);
-    console.log(favRecipesList);
-    localStorage.setItem("favourites", JSON.stringify(favRecipesList));
-    JSON.parse(localStorage.getItem("favourites"));
-    console.log(JSON.parse(localStorage.getItem("favourites")));
-  });
+  favButton.addEventListener("click", function(){
+    
+    var favRecipes = {
+      name: "",
+      url: "",
+      imageUrl: "",
+      };
+    
+      favRecipes.name = this.parentElement.querySelector("h4").textContent;
+      favRecipes.imageUrl = this.parentElement.firstChild.querySelector("img").src;
+      favRecipes.url = this.parentElement.querySelector(".card-link").href;
+      favRecipesList.push(favRecipes)
+      localStorage.setItem("favourites", JSON.stringify(favRecipesList));
+      var testLocal = JSON.parse(localStorage.getItem("favourites"));
+      console.log(testLocal);
+    
+  }); 
 };
 
 formEl.addEventListener("submit", formSubmitHandler);

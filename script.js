@@ -16,6 +16,13 @@ var glutenOption;
 var vegetarianOption;
 var dairyOption;
 
+var favRecipesList = [];
+var favRecipes = {
+  name: "",
+  url: "",
+  imageUrl: "",
+};
+
 var formSubmitHandler = function (event) {
   event.preventDefault();
 
@@ -106,34 +113,47 @@ var searchAPi = function (query, vegan, glutenFree, vegetarian, dairy) {
 };
 
 var displayResults = function (label, url, image) {
+  var cardEl = document.createElement("div");
+  var cardSectionEl = document.createElement("div");
+  var subtitleEl = document.createElement("h4");
+  var descriptionEl = document.createElement("p");
+  var linkEl = document.createElement("a");
+  var linkImageEl = document.createElement("a");
+  var cardImageEl = document.createElement("img");
+  var favButton = document.createElement("i");
 
-    var cardEl = document.createElement("div");
-    var cardSectionEl = document.createElement("div");
-    var subtitleEl = document.createElement("h4");
-    var descriptionEl = document.createElement("p");
-    var linkEl = document.createElement("a");
-    var linkImageEl = document.createElement("a");
-    var cardImageEl = document.createElement("img")
+  cardEl.setAttribute("class", "card");
+  cardSectionEl.setAttribute("class", "card-section");
+  subtitleEl.textContent = label;
+  cardImageEl.src = image;
+  linkEl.setAttribute("href", url);
+  linkEl.setAttribute("target", "_blank");
+  linkEl.setAttribute("class", "card-link");
+  linkImageEl.setAttribute("href", url);
+  linkImageEl.setAttribute("target", "_blank");
+  descriptionEl.className = "description";
+  favButton.setAttribute("class", "far fa-heart");
 
-    cardEl.setAttribute("class", "card")
-    cardSectionEl.setAttribute("class", "card-section");
-    subtitleEl.textContent = label;
-    cardImageEl.src = image;
-    linkEl.setAttribute("href", url);
-    linkEl.setAttribute("target", "_blank");
-    linkEl.setAttribute("class", "card-link")
-    linkImageEl.setAttribute("href", url);
-    linkImageEl.setAttribute("target", "_blank")
-    descriptionEl.className = "description";
+  searchResults.appendChild(cardEl);
+  linkEl.appendChild(subtitleEl);
+  cardEl.appendChild(cardSectionEl);
+  cardSectionEl.appendChild(linkImageEl);
+  linkImageEl.appendChild(cardImageEl);
+  cardSectionEl.appendChild(descriptionEl);
+  cardSectionEl.appendChild(linkEl);
+  cardSectionEl.appendChild(favButton);
 
-    searchResults.appendChild(cardEl);
-    linkEl.appendChild(subtitleEl);
-    cardEl.appendChild(cardSectionEl);
-    cardSectionEl.appendChild(linkImageEl)
-    linkImageEl.appendChild(cardImageEl);
-    cardSectionEl.appendChild(descriptionEl);
-    cardSectionEl.appendChild(linkEl);
-
-}
+  favButton.addEventListener("click", function () {
+    favRecipes.name = favButton.previousSibling.firstChild.textContent;
+    favRecipes.url = favButton.previousSibling.href;
+    favRecipes.imageUrl =
+      favButton.previousSibling.previousSibling.previousSibling.src;
+    favRecipesList.push(favRecipes);
+    console.log(favRecipesList);
+    localStorage.setItem("favourites", JSON.stringify(favRecipesList));
+    JSON.parse(localStorage.getItem("favourites"));
+    console.log(JSON.parse(localStorage.getItem("favourites")));
+  });
+};
 
 formEl.addEventListener("submit", formSubmitHandler);

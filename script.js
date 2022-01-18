@@ -106,14 +106,7 @@ var displayResults = function (label, url, image) {
   cardSectionEl.appendChild(linkEl);
   cardSectionEl.appendChild(favButton);
 
-  favButton.addEventListener("click", function (event) {
-    event.defaultPrevented();
-    var favRecipe = favButton.parentElement.h4;
-    localStorage.setItem(favRecipe);
-
-    //local
-  });
-};
+}
 
 formEl.addEventListener("submit", formSubmitHandler);
 
@@ -148,4 +141,3 @@ dairyFreeCheckboxEl.addEventListener("change", function () {
     dairyOption;
   }
 });
-// getApiData();

@@ -104,31 +104,33 @@ var searchAPi = function (query, vegan, glutenFree, vegetarian, dairy) {
 };
 
 var displayResults = function (label, url, image) {
-  var cardEl = document.createElement("div");
-  var cardSectionEl = document.createElement("div");
-  var subtitleEl = document.createElement("h4");
-  var descriptionEl = document.createElement("p");
-  var linkEl = document.createElement("a");
-  var cardImageEl = document.createElement("img");
-  var favButton = document.createElement("i");
 
-  cardEl.setAttribute("class", "card");
-  cardSectionEl.setAttribute("class", "card-section");
-  subtitleEl.textContent = label;
-  cardImageEl.src = image;
-  linkEl.setAttribute("href", url);
-  linkEl.setAttribute("target", "_blank");
-  linkEl.setAttribute("class", "card-link");
-  descriptionEl.className = "description";
-  favButton.setAttribute("class", "far fa-heart");
+    var cardEl = document.createElement("div");
+    var cardSectionEl = document.createElement("div");
+    var subtitleEl = document.createElement("h4");
+    var descriptionEl = document.createElement("p");
+    var linkEl = document.createElement("a");
+    var linkImageEl = document.createElement("a");
+    var cardImageEl = document.createElement("img")
 
-  searchResults.appendChild(cardEl);
-  linkEl.appendChild(subtitleEl);
-  cardEl.appendChild(cardSectionEl);
-  cardSectionEl.appendChild(cardImageEl);
-  cardSectionEl.appendChild(descriptionEl);
-  cardSectionEl.appendChild(linkEl);
-  cardSectionEl.appendChild(favButton);
+    cardEl.setAttribute("class", "card")
+    cardSectionEl.setAttribute("class", "card-section");
+    subtitleEl.textContent = label;
+    cardImageEl.src = image;
+    linkEl.setAttribute("href", url);
+    linkEl.setAttribute("target", "_blank");
+    linkEl.setAttribute("class", "card-link")
+    linkImageEl.setAttribute("href", url);
+    linkImageEl.setAttribute("target", "_blank")
+    descriptionEl.className = "description";
+
+    searchResults.appendChild(cardEl);
+    linkEl.appendChild(subtitleEl);
+    cardEl.appendChild(cardSectionEl);
+    cardSectionEl.appendChild(linkImageEl)
+    linkImageEl.appendChild(cardImageEl);
+    cardSectionEl.appendChild(descriptionEl);
+    cardSectionEl.appendChild(linkEl);
 
 }
 

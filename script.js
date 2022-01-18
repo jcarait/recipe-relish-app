@@ -19,6 +19,8 @@ var dairyOption;
 var formSubmitHandler = function (event) {
   event.preventDefault();
 
+  searchResults.innerHTML = "";
+
   if (veganCheckboxEl.checked) {
     veganOption = "vegan";
   } else {

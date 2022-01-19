@@ -7,7 +7,9 @@ var veganCheckboxEl = document.querySelector("#vegan");
 var glutenFreeCheckboxEl = document.querySelector("#gluten-free");
 var vegeterianCheckboxEl = document.querySelector("#vegetarian");
 var dairyFreeCheckboxEl = document.querySelector("#dairy-free");
-var randomAnime = document.querySelector(".random_anime");
+var randomPokemon = document.querySelector(".random-pokemon");
+var pokemonImgEl = document.querySelector("#pokemon-img");
+var pokemonBtnEl = document.querySelector("#pokemon-rng");
 
 var apiID = "bf7ef27c";
 var apiKey = "f26b311cc0cf67ce4f322e55dca05398";
@@ -159,21 +161,45 @@ var displayResults = function (label, url, image) {
 
 formEl.addEventListener("submit", formSubmitHandler);
 
-var getAnime = function () {
-  fetch("https://anime-facts-rest-api.herokuapp.com/api/v1").then(function (
+
+
+var getPokemon = function () {
+
+  var pokeInt = 898;
+  var pokeRandomIndex = Math.floor(Math.random() * pokeInt);
+  var pokemonApiUrl = "https://pokeapi.co/api/v2/pokemon/" + pokeRandomIndex;
+
+
+  fetch(pokemonApiUrl).then(function (
     response
   ) {
     if (response.ok) {
       response.json().then(function (data) {
         console.log(data);
-        var randomIndex = Math.floor(Math.random() * data.data.length);
-        console.log(randomIndex);
-        var anime = data.data[randomIndex].anime_name;
-        console.log(anime);
-        randomAnime.textContent =
-          "A random  Anime to Watch while Eating: " + anime;
+
+        var originalPokemonStr = capitalizeFirstLetter(data.name)
+
+        function capitalizeFirstLetter(string) {
+          return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+
+        randomPokemon.textContent = originalPokemonStr;
+        pokemonImgEl.setAttribute("src", data.sprites.front_default)
+
+
+
+        //   var anime = data.data[randomIndex].anime_name;
+        //   console.log(anime);
+        //   randomAnime.textContent =
+        //     "A random  Anime to Watch while Eating: " + anime;
       });
     }
   });
 };
-getAnime();
+
+pokemonBtnEl.addEventListener("click", function () {
+  getPokemon()
+});
+
+
+getPokemon();

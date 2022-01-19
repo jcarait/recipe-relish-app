@@ -160,4 +160,18 @@ var displayResults = function (label, url, image) {
 
 formEl.addEventListener("submit", formSubmitHandler);
 
+var getAnime = function () {
+  fetch("https://anime-facts-rest-api.herokuapp.com/api/v1").then(function (
+    response
+  ) {
+    if (response.ok) {
+      response.json().then(function (data) {
+        console.log(data);
+        var randomIndex = Math.floor(Math.random() * 12);
+        var 
+      });
+    }
+  });
+};
+getAnime();
 

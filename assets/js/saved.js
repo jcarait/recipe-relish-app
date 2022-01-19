@@ -1,4 +1,12 @@
 var savedList = document.querySelector("#save-section");
+var clearHistory = document.querySelector("#clear-history");
+
+var clearAll = function () {
+  localStorage.clear();
+  savedList.innerHTML = "";
+};
+
+clearHistory.addEventListener("click", clearAll);
 
 var creatingDisplay = function (image, name, url) {
   var cardEl = document.createElement("div");
@@ -20,23 +28,24 @@ var creatingDisplay = function (image, name, url) {
   linkImageEl.setAttribute("target", "_blank");
   descriptionEl.className = "description";
 
-  searchResults.appendChild(cardEl);
+  savedList.appendChild(cardEl);
   linkEl.appendChild(subtitleEl);
   cardEl.appendChild(cardSectionEl);
   cardSectionEl.appendChild(linkImageEl);
   linkImageEl.appendChild(cardImageEl);
-  cardSectionEl.appendChild(descriptionEl);
   cardSectionEl.appendChild(linkEl);
-  cardSectionEl.appendChild(favButton);
+  cardSectionEl.appendChild(linkEl);
 };
 
 var displayFavs = function () {
   var favList = JSON.parse(localStorage.getItem("favourites"));
   console.log(favList);
-  for (i = o; i < favList.length; i++) {
-    name = favList[i].name;
+  for (i = 0; i < favList.length; i++) {
+    foodName = favList[i].name;
     image = favList[i].imageUrl;
     url = favList[i].url;
-    creatingDisplay(image, name, url);
+    creatingDisplay(image, foodName, url);
   }
 };
+
+displayFavs();

@@ -7,6 +7,7 @@ var veganCheckboxEl = document.querySelector("#vegan");
 var glutenFreeCheckboxEl = document.querySelector("#gluten-free");
 var vegeterianCheckboxEl = document.querySelector("#vegetarian");
 var dairyFreeCheckboxEl = document.querySelector("#dairy-free");
+var randomAnime = document.querySelector(".random_anime");
 
 var apiID = "bf7ef27c";
 var apiKey = "f26b311cc0cf67ce4f322e55dca05398";
@@ -108,7 +109,6 @@ var searchAPi = function (query, vegan, glutenFree, vegetarian, dairy) {
 };
 
 var displayResults = function (label, url, image) {
-
   var cardEl = document.createElement("div");
   var cardSectionEl = document.createElement("div");
   var subtitleEl = document.createElement("h4");
@@ -139,23 +139,22 @@ var displayResults = function (label, url, image) {
   cardSectionEl.appendChild(linkEl);
   cardSectionEl.appendChild(favButton);
 
-  favButton.addEventListener("click", function(){
-    
+  favButton.addEventListener("click", function () {
     var favRecipes = {
       name: "",
       url: "",
       imageUrl: "",
-      };
-    
-      favRecipes.name = this.parentElement.querySelector("h4").textContent;
-      favRecipes.imageUrl = this.parentElement.firstChild.querySelector("img").src;
-      favRecipes.url = this.parentElement.querySelector(".card-link").href;
-      favRecipesList.push(favRecipes)
-      localStorage.setItem("favourites", JSON.stringify(favRecipesList));
-      var testLocal = JSON.parse(localStorage.getItem("favourites"));
-      console.log(testLocal);
-    
-  }); 
+    };
+
+    favRecipes.name = this.parentElement.querySelector("h4").textContent;
+    favRecipes.imageUrl =
+      this.parentElement.firstChild.querySelector("img").src;
+    favRecipes.url = this.parentElement.querySelector(".card-link").href;
+    favRecipesList.push(favRecipes);
+    localStorage.setItem("favourites", JSON.stringify(favRecipesList));
+    var testLocal = JSON.parse(localStorage.getItem("favourites"));
+    console.log(testLocal);
+  });
 };
 
 formEl.addEventListener("submit", formSubmitHandler);
@@ -167,11 +166,14 @@ var getAnime = function () {
     if (response.ok) {
       response.json().then(function (data) {
         console.log(data);
-        var randomIndex = Math.floor(Math.random() * 12);
-        var 
+        var randomIndex = Math.floor(Math.random() * data.data.length);
+        console.log(randomIndex);
+        var anime = data.data[randomIndex].anime_name;
+        console.log(anime);
+        randomAnime.textContent =
+          "A random  Anime to Watch while Eating: " + anime;
       });
     }
   });
 };
 getAnime();
-

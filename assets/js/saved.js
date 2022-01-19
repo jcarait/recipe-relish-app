@@ -19,6 +19,15 @@ var creatingDisplay = function (image, name, url) {
   linkImageEl.setAttribute("href", url);
   linkImageEl.setAttribute("target", "_blank");
   descriptionEl.className = "description";
+
+  searchResults.appendChild(cardEl);
+  linkEl.appendChild(subtitleEl);
+  cardEl.appendChild(cardSectionEl);
+  cardSectionEl.appendChild(linkImageEl);
+  linkImageEl.appendChild(cardImageEl);
+  cardSectionEl.appendChild(descriptionEl);
+  cardSectionEl.appendChild(linkEl);
+  cardSectionEl.appendChild(favButton);
 };
 
 var displayFavs = function () {

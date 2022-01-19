@@ -159,3 +159,5 @@ var displayResults = function (label, url, image) {
 };
 
 formEl.addEventListener("submit", formSubmitHandler);
+
+

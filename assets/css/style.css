@@ -1,7 +1,7 @@
 /* Header style */
 
 .subnav-hero-section {
-  text-align: center;
+
   background: lightgray;
   background-size: cover;
   position: relative;
@@ -15,29 +15,26 @@
   -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center;
-  height: 150px;
+          flex-direction: column;        
+  height: 175px;
 }
 
 .subnav-hero-section .subnav-hero-headline {
   color: olivedrab;
-  position: absolute;
 }
 
 .subnav-hero-subnav {
   float: none;
-  position: absolute;
   text-align: center;
   margin: 0 auto;
   bottom: 0;
+  overflow:hidden;
   width: 100%;
 }
 
-.logo-left {
-  display: flex;
-  height:50%;
-  margin-right: 3rem;
-  padding:0;
-  margin-bottom:20px;
+.logo {
+  height: 30%;
+  margin-top: 5px;
 }
 
 
@@ -307,6 +304,10 @@ footer {
     text-align: center;
     margin: 2rem 0 0;
   }
+
+.social li {
+    list-style-type: none;
+}
   /* Footer section ends */
 
   

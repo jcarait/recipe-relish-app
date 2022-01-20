@@ -268,7 +268,20 @@ h4 {
   
 }
 
-/* Recipes Results section  - STILL NEEDS WORK*/
+/* Recipes Results section*/
+
+.fa-heart {
+  transition: all 0.1s;
+}
+
+.fa-heart:hover {
+  color:lightpink;
+}
+
+.fa-heart.saved-recipe {
+  color: red;
+  font-size: 20px;
+}
 
 .save {
   margin-top: 65%;

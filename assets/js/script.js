@@ -147,6 +147,8 @@ var displayResults = function (label, url, image) {
   cardSectionEl.appendChild(linkEl);
   cardSectionEl.appendChild(favButton);
 
+
+  //when heart icon is clicked, it saves data from card into local storage.
   favButton.addEventListener("click", function () {
     var favRecipes = {
       name: "",
@@ -161,8 +163,17 @@ var displayResults = function (label, url, image) {
     favRecipesList.push(favRecipes);
     localStorage.setItem("favourites", JSON.stringify(favRecipesList));
     var testLocal = JSON.parse(localStorage.getItem("favourites"));
+    favButton.classList.add("saved-recipe", "fas");
+    favButton.classList.remove("far");
+
     console.log(testLocal);
+
+
   });
+
+
+
+
 };
 
 formEl.addEventListener("submit", formSubmitHandler);

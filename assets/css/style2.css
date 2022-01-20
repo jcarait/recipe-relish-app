@@ -7,6 +7,10 @@
   font-family: "poppins", sans-serif;
 }
 
+.subnav-hero-section {
+  margin-bottom: 1rem;
+}
+
 .showcase {
   position: absolute;
   right: 0;

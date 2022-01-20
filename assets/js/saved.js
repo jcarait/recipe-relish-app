@@ -8,6 +8,8 @@ var clearAll = function () {
 
 clearHistory.addEventListener("click", clearAll);
 
+
+// display data from local storage
 var creatingDisplay = function (image, name, url) {
   var cardEl = document.createElement("div");
   var cardSectionEl = document.createElement("div");
@@ -37,6 +39,8 @@ var creatingDisplay = function (image, name, url) {
   cardSectionEl.appendChild(linkEl);
 };
 
+
+// get stored favourites from local storage
 var displayFavs = function () {
   var favList = JSON.parse(localStorage.getItem("favourites"));
   console.log(favList);

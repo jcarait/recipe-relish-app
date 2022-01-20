@@ -58,6 +58,7 @@ var formSubmitHandler = function (event) {
 };
 
 var searchAPi = function (query, vegan, glutenFree, vegetarian, dairy) {
+
   var apiUrl =
     "https://api.edamam.com/api/recipes/v2?" +
     "q=" +
@@ -68,7 +69,7 @@ var searchAPi = function (query, vegan, glutenFree, vegetarian, dairy) {
     apiID +
     "&type=public";
 
-  //logical function to determine which API paramters to query based on user selection
+  //logical function to determine which paramaters are added to API url
   if (vegan) {
     apiUrl += "&health=" + vegan;
   }
@@ -87,13 +88,16 @@ var searchAPi = function (query, vegan, glutenFree, vegetarian, dairy) {
 
   console.log(apiUrl);
 
+  var resultsInt = 10;
+
   fetch(apiUrl, {
     mode: "cors",
   }).then(function (response) {
     if (response.ok) {
       response.json().then(function (data) {
-        console.log(data);
-        for (var i = 0; i < 10; i++) {
+
+        //loop until there are 20 results displayed on page
+        for (var i = 0; i < resultsInt; i++) {
           var recipeResults = {
             label: data.hits[i].recipe.label,
             url: data.hits[i].recipe.url,
@@ -110,6 +114,8 @@ var searchAPi = function (query, vegan, glutenFree, vegetarian, dairy) {
   });
 };
 
+
+// display data on page in cards
 var displayResults = function (label, url, image) {
   var cardEl = document.createElement("div");
   var cardSectionEl = document.createElement("div");
@@ -162,7 +168,7 @@ var displayResults = function (label, url, image) {
 formEl.addEventListener("submit", formSubmitHandler);
 
 
-
+//Second API
 var getPokemon = function () {
 
   var pokeInt = 898;
@@ -186,12 +192,6 @@ var getPokemon = function () {
         randomPokemon.textContent = originalPokemonStr;
         pokemonImgEl.setAttribute("src", data.sprites.front_default)
 
-
-
-        //   var anime = data.data[randomIndex].anime_name;
-        //   console.log(anime);
-        //   randomAnime.textContent =
-        //     "A random  Anime to Watch while Eating: " + anime;
       });
     }
   });

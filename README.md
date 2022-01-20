@@ -29,7 +29,7 @@ Given a recipe finder with input forms, when I search for a recipe, then I am pr
 
 Given an input form, when I filter dishes based on my dietary requirements, then I am presented with a list of recipes for dishes that meet my requirements and links to additional information like ingredients, time and procedures for my reference.
 
-Given a search history, when I click on a previously search dish, then I am presented with the same recipe so I can recreate them.
+Given a favourites tab, when I click on a previously search dish, then I am presented with the same recipe so I can recreate them.
 
 Given a list of search results, when I click on the recipe I want, then I am directed to the specified recipe for additional information on how to make it, time requires and user reviews.
 

@@ -7,6 +7,9 @@ var veganCheckboxEl = document.querySelector("#vegan");
 var glutenFreeCheckboxEl = document.querySelector("#gluten-free");
 var vegeterianCheckboxEl = document.querySelector("#vegetarian");
 var dairyFreeCheckboxEl = document.querySelector("#dairy-free");
+var randomPokemon = document.querySelector(".random-pokemon");
+var pokemonImgEl = document.querySelector("#pokemon-img");
+var pokemonBtnEl = document.querySelector("#pokemon-rng");
 
 var apiID = "bf7ef27c";
 var apiKey = "f26b311cc0cf67ce4f322e55dca05398";
@@ -17,11 +20,6 @@ var vegetarianOption;
 var dairyOption;
 
 var favRecipesList = [];
-var favRecipes = {
-  name: "",
-  url: "",
-  imageUrl: "",
-};
 
 var formSubmitHandler = function (event) {
   event.preventDefault();
@@ -113,7 +111,6 @@ var searchAPi = function (query, vegan, glutenFree, vegetarian, dairy) {
 };
 
 var displayResults = function (label, url, image) {
-
   var cardEl = document.createElement("div");
   var cardSectionEl = document.createElement("div");
   var subtitleEl = document.createElement("h4");
@@ -145,16 +142,64 @@ var displayResults = function (label, url, image) {
   cardSectionEl.appendChild(favButton);
 
   favButton.addEventListener("click", function () {
-    favRecipes.name = favButton.previousSibling.firstChild.textContent;
-    favRecipes.url = favButton.previousSibling.href;
+    var favRecipes = {
+      name: "",
+      url: "",
+      imageUrl: "",
+    };
+
+    favRecipes.name = this.parentElement.querySelector("h4").textContent;
     favRecipes.imageUrl =
-      favButton.previousSibling.previousSibling.previousSibling.src;
+      this.parentElement.firstChild.querySelector("img").src;
+    favRecipes.url = this.parentElement.querySelector(".card-link").href;
     favRecipesList.push(favRecipes);
-    console.log(favRecipesList);
     localStorage.setItem("favourites", JSON.stringify(favRecipesList));
-    JSON.parse(localStorage.getItem("favourites"));
-    console.log(JSON.parse(localStorage.getItem("favourites")));
+    var testLocal = JSON.parse(localStorage.getItem("favourites"));
+    console.log(testLocal);
   });
 };
 
 formEl.addEventListener("submit", formSubmitHandler);
+
+
+
+var getPokemon = function () {
+
+  var pokeInt = 898;
+  var pokeRandomIndex = Math.floor(Math.random() * pokeInt);
+  var pokemonApiUrl = "https://pokeapi.co/api/v2/pokemon/" + pokeRandomIndex;
+
+
+  fetch(pokemonApiUrl).then(function (
+    response
+  ) {
+    if (response.ok) {
+      response.json().then(function (data) {
+        console.log(data);
+
+        var originalPokemonStr = capitalizeFirstLetter(data.name)
+
+        function capitalizeFirstLetter(string) {
+          return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+
+        randomPokemon.textContent = originalPokemonStr;
+        pokemonImgEl.setAttribute("src", data.sprites.front_default)
+
+
+
+        //   var anime = data.data[randomIndex].anime_name;
+        //   console.log(anime);
+        //   randomAnime.textContent =
+        //     "A random  Anime to Watch while Eating: " + anime;
+      });
+    }
+  });
+};
+
+pokemonBtnEl.addEventListener("click", function () {
+  getPokemon()
+});
+
+
+getPokemon();

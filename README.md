@@ -25,9 +25,9 @@ As a consumer, I want to be able to view my search history so that I can review 
 
 ## Acceptance Criteria
 
-Given a recipe finder with input forms, when I search for a recipe, then I am presented with a list of recipes for that dish and that the dish will be saved to the search history.
+Given a recipe finder with input query, when I search for a recipe, then I am presented with a list of recipes for that query.
 
-Given an input form, when I filter dishes based on my dietary requirements, then I am presented with a list of recipes for dishes that meet my requirements and links to additional information like ingredients, time and procedures for my reference.
+Given an input form, when I filter dishes based on my dietary requirements, then I am presented with a list of recipes for dishes that meets my requirements and links to additional information like ingredients, time and procedures for my reference.
 
 Given a favourites tab, when I click on a previously search dish, then I am presented with the same recipe so I can recreate them.
 
@@ -47,8 +47,8 @@ As a bonus feature, a random pokemon will be presented on load and will randomis
 
 - Has a search option
 - Has 4 filter requirements based on dietary needs
-- Multiple button and submit features such as favorites, new pokemon and history clearing.
-- local history
+- Multiple button and submit features such as favorites, new pokemon and clear history.
+- Local Storage
 
 ## 3rd Party Libraries
 

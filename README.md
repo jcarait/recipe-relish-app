@@ -3,7 +3,7 @@
 ## Deployment
 
 - [GitHub Repository](https://github.com/carolinatnp/recipe-app)
-- [GitHub Deployed Link](https://carolinatnp.github.io/recipe-app/)
+- [GitHub Deployed Link](https://jcarait.github.io/recipe-relish-app/)
 
 ## User Story
 
